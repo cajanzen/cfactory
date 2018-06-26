@@ -1,0 +1,80 @@
+{
+  "v": "4.0",
+  "name": "marking_c",
+  "workspace": {
+    "environments": {
+      "default": {
+        "machines": {
+          "dev-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {},
+            "volumes": {},
+            "installers": [
+              "org.eclipse.che.exec",
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.git-credentials",
+              "org.eclipse.che.ssh"
+            ],
+            "env": {}
+          }
+        },
+        "recipe": {
+          "type": "dockerfile",
+          "content": "FROM eclipse/cpp_gcc\nRUN sudo apt-get update\nRUN sudo apt-get -yq install valgrind curl\n#cmake install per EricCrosson/latex-cmake\nRUN sudo -s bash -c 'curl -sSL https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz | tar -xzC /opt'\nRUN sudo -s bash -c 'ln -s /opt/cmake-3.10.2-Linux-x86_64/bin/cmake /usr/bin/cmake'\nRUN sudo -s bash -c 'ln -s /opt/cmake-3.10.2-Linux-x86_64/bin/cpack /usr/bin/cpack'\nRUN sudo -s bash -c 'ln -s /opt/cmake-3.10.2-Linux-x86_64/bin/ctest /usr/bin/ctest'\nRUN mkdir -p /home/user/.ssh",
+          "contentType": "text/x-dockerfile"
+        }
+      }
+    },
+    "defaultEnv": "default",
+    "projects": [
+      {
+        "links": [],
+        "name": "htmlstarter",
+        "attributes": {},
+        "type": "blank",
+        "source": {
+          "location": "https://cisgitlab.ufv.ca/cjanzen/htmlstarter.git",
+          "type": "git",
+          "parameters": {}
+        },
+        "path": "/htmlstarter",
+        "problems": [],
+        "mixins": []
+      }
+    ],
+    "name": "marking-c",
+    "commands": [
+      {
+        "commandLine": "cd ${current.project.path} && make && ./a.out",
+        "name": "run",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && mkdir -p build; cd build; cmake ..; make",
+        "name": "cmake build",
+        "attributes": {},
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && make clean; [ -d build ] && { cd build; make clean }",
+        "name": "clean",
+        "attributes": {},
+        "type": "custom"
+      },
+      {
+        "commandLine": "cd ${current.project.path} && make",
+        "name": "make",
+        "attributes": {},
+        "type": "custom"
+      }
+    ],
+    "links": []
+  }
+}
