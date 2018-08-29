@@ -32,15 +32,15 @@
     "projects": [
       {
         "links": [],
-        "name": "cmake",
+        "name": "chesingleuser",
         "attributes": {},
         "type": "blank",
         "source": {
-          "location": "https://cisgitlab.ufv.ca/cjanzen/htmlstarter.git",
+          "location": "https://cisgitlab.ufv.ca/cjanzen/chesingleuser",
           "type": "git",
           "parameters": {}
         },
-        "path": "/htmlstarter",
+        "path": "/chesingle",
         "problems": [],
         "mixins": []
       }
