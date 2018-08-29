@@ -32,7 +32,7 @@
     "projects": [
       {
         "links": [],
-        "name": "htmlstarter",
+        "name": "cmake",
         "attributes": {},
         "type": "blank",
         "source": {
@@ -45,7 +45,7 @@
         "mixins": []
       }
     ],
-    "name": "marking-c",
+    "name": "cmake",
     "commands": [
       {
         "commandLine": "cd ${current.project.path} && make && ./a.out",
